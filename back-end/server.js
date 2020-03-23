@@ -16,19 +16,17 @@ app.use(bodyParser.json())
 
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
+console.log(dbParams.database)
 const db = new Pool(dbParams);
 db.connect();
 
 //GET
 app.get("/books", (request, response) => {
-  const showBooks = () => {
-    return db.query(
-      `SELECT * FROM books;`)
-  }
-  .then(data => {
-    const newBook = data.rows[0];
-  response.json({showBooks: newBook});
-  })
+  db.query('SELECT * FROM books;')
+    .then(data => {
+      const books = data.rows;
+      response.json({ books });
+    })
 });
 
 

@@ -130,11 +130,11 @@ export default function SignInSide() {
               margin="normal"
               required
               fullWidth
-              name="autor"
-              label="autor"
-              type="autor"
-              id="autor"
-              autoComplete="autor"
+              name="author"
+              label="author"
+              type="author"
+              id="author"
+              autoComplete="author"
             />
             <TextField
               variant="outlined"

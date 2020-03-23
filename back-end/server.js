@@ -38,13 +38,12 @@ app.listen(PORT, () => {
 
 //Post books from the API and send to the database
 app.post("/books/create", (request, response) => {
-  const titleBook = request.body.title;
-  const autorBook = request.body.autor;
-  const isbnBook = request.body.isbn;
+  const { title, author, isbn } = request.body;
+  console.log(request.body)
 
   //if()
-  db.query(`INSERT INTO books(title, autor, isbn) VALUES($1,$2,$3) RETURNING *;`,
-    [request.body.title, request.body.autor, request.body.isbn])
+  db.query(`INSERT INTO books(title, author, isbn) VALUES($1,$2,$3) RETURNING *;`,
+    [title, author, isbn])
     .then(data => {
       const newbook = data.rows[0];
       response.json({ book: newbook });
@@ -52,9 +51,7 @@ app.post("/books/create", (request, response) => {
     .catch((error) => {
       console.log({ error });
       response.status(500).json({ error });
-
     })
-
 });
 
 

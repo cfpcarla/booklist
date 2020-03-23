@@ -5,7 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const morgan = require("morgan");
-const axios = require("axios");
+
 app.use(morgan("dev"));
 app.use(
   bodyParser.urlencoded({
@@ -39,19 +39,21 @@ app.listen(PORT, () => {
 //Post books from the API and send to the database
 app.post("/books/create", (request, response) => {
   const { title, author, isbn } = request.body;
-  console.log(request.body)
 
-  //if()
-  db.query(`INSERT INTO books(title, author, isbn) VALUES($1,$2,$3) RETURNING *;`,
-    [title, author, isbn])
-    .then(data => {
-      const newbook = data.rows[0];
-      response.json({ book: newbook });
-    })
-    .catch((error) => {
-      console.log({ error });
-      response.status(500).json({ error });
-    })
+  if (title && author && isbn) {
+    db.query(`INSERT INTO books(title, author, isbn) VALUES($1,$2,$3) RETURNING *;`,
+      [title, author, isbn])
+      .then(data => {
+        const newbook = data.rows[0];
+        response.json({ book: newbook });
+      })
+      .catch((error) => {
+        console.log({ error });
+        response.status(500).json({ error });
+      })
+  } else {
+    return response.status(400).json({ error: "Bad Request. Missing attribute. Title, Author and ISBN are required." })
+  }
 });
 
 

@@ -1,6 +1,28 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import MenuBook from '@material-ui/icons/MenuBook';
+import Paper from '@material-ui/core/Paper';
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -54,7 +76,13 @@ export default function SimpleModal() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-        <form className={classes.form} noValidate>
+          <Avatar className={classes.avatar}>
+            <MenuBook />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Search for a book
+          </Typography>
+          <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -66,28 +94,6 @@ export default function SimpleModal() {
               autoComplete="title"
               autoFocus
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="autor"
-              label="autor"
-              type="autor"
-              id="autor"
-              autoComplete="autor"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="isbn"
-              label="isbn"
-              type="isbn"
-              id="isbn"
-              autoComplete="isbn"
-            />
             <Button
               type="submit"
               fullWidth
@@ -95,8 +101,8 @@ export default function SimpleModal() {
               color="primary"
               className={classes.submit}
             >
-             Send
-            </Button>
+              Search
+              </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -111,7 +117,6 @@ export default function SimpleModal() {
               <Copyright />
             </Box>
           </form>
-          <SimpleModal />
         </div>
       </Modal>
     </div>

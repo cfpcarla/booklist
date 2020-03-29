@@ -58,23 +58,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-
-
-//form
-export default function SignInSide() {
+export default function Home() {
   const classes = useStyles();
 
-  // const [classicModal, setClassicModal] = useState([]);
-  // const [show, popupState] = useState(false);
-  // const [classicModal, setClassicModal] = useState(false);
-  // const [mode, setMode] = useState('view')
-  // const [user, setUser] = useState("");
-  // const [error, setError] = useState(false);
+  axios({
+    method: "get",
+    url: "http://localhost:8080/books",
+    responseType: "json"
+  }).then((books) => {
+    console.log(books)
+  }).catch(error => console.log(error));
 
 
-  // const apiKey = process.env.GOOGLEAPIKEY;
   // axios({
   //   method: "get",
   //   url: `https://maps.googleapis.com/maps/api/geocode/json?address=${request.body.address}&key=${apiKey}`,

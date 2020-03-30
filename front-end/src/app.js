@@ -1,42 +1,69 @@
 import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import SimpleModal from './Components/Modal/SimpleModal';
-import axios from 'axios';
+import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
+import Avatar from '@material-ui/core/Avatar';
+import MenuBook from '@material-ui/icons/MenuBook';
+import axios from 'axios'
+import SimpleModal from './Components/Modal/SimpleModal'
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100vh',
+  icon: {
+    marginRight: theme.spacing(2),
   },
-  image: {
-    backgroundImage: 'url(https://s3.amazonaws.com/cdn.leiturinha.com.br/blog/uploads/2017/10/hist%C3%B3ria-do-livro.jpg)',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'right',
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
   },
-  paper: {
-    margin: theme.spacing(8, 4),
+  heroButtons: {
+    marginTop: theme.spacing(4),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
   },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+  cardContent: {
+    flexGrow: 1,
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
   },
 }));
 
-export default function Home() {
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+export default function Album() {
   const classes = useStyles();
 
   axios({
@@ -46,6 +73,84 @@ export default function Home() {
   }).then((books) => {
     console.log(books)
   }).catch(error => console.log(error));
+
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <AppBar position="relative">
+        <Toolbar>
+          <Avatar className={classes.avatar}>
+            <MenuBook />
+          </Avatar>
+          <Typography variant="h5" color="inherit" noWrap>
+            BookList
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main>
+        {/* Hero unit */}
+        <div className={classes.heroContent}>
+          <Container maxWidth="sm">
+
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+              “I do believe something very magical can happen when you read a book.” – J.K. Rowling
+            </Typography>
+            <div className={classes.heroButtons}>
+              <Grid container spacing={2} justify="center">
+                <Button >
+                  <SimpleModal />
+                </Button>
+              </Grid>
+            </div>
+          </Container>
+        </div>
+        <Container className={classes.cardGrid} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Heading
+                    </Typography>
+                    <Typography>
+                      This is a media card. You can use this section to describe the content.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </main>
+      {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+          Something here to give the footer a purpose!
+        </Typography>
+        <Copyright />
+      </footer>
+      {/* End footer */}
+    </React.Fragment>
+  );
+}
+
+
+
 
 
   // axios({
@@ -74,15 +179,3 @@ export default function Home() {
   // }, []); //make a function to get called after a new post
 
 
-  return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={2} md={5} className={classes.image} />
-      <Grid item xs={12} sm={10} md={7} component={Paper} elevation={6} square>
-
-        <SimpleModal />
-
-      </Grid>
-    </Grid>
-  );
-}

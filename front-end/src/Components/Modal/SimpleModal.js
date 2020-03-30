@@ -9,7 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import MenuBook from '@material-ui/icons/MenuBook';
-import Paper from '@material-ui/core/Paper';
 
 function Copyright() {
   return (
@@ -66,9 +65,18 @@ export default function SimpleModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <Button
+              type="button"
+              onClick={handleOpen}
+              variant="contained"
+              color="primary"
+              width= "auto"
+            >
+              Search
+              </Button>
+      {/* <button type="button" onClick={handleOpen}>
         Open Modal
-      </button>
+      </button> */}
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

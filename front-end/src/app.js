@@ -9,7 +9,7 @@ import Link from '@material-ui/core/Link';
 import axios from 'axios'
 import SimpleModal from './Components/Modal/SimpleModal'
 import NavBar from './Components/NavBar/NavBar'
-import BookCard from './Components/BookCard/BookCard'
+import BookCardList from './Components/BookCardList/BookCardList'
 
 
 function Copyright() {
@@ -62,17 +62,6 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function App() {
   const classes = useStyles();
 
-  axios({
-    method: "get",
-    url: "http://localhost:8080/books",
-    responseType: "json"
-  }).then((books) => {
-    console.log(books)
-  }).catch(error => console.log(error));
-
-
-
-
   return(
     <React.Fragment >
       <CssBaseline />
@@ -96,13 +85,7 @@ export default function App() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-
-                <BookCard />
-
-              </Grid>
-            ))}
+            <BookCardList />
           </Grid>
         </Container>
       </main>

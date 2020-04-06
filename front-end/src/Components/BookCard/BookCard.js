@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BookCard() {
+export default function BookCard(props) {
   const classes = useStyles();
 
   return (
     <React.Fragment >
       <Card className={classes.card} >
-      {/* <form onSubmit={handleSubmit}> */}
+        {/* <form onSubmit={handleSubmit}> */}
         <CardMedia
           className={classes.cardMedia}
           image="https://s26162.pcdn.co/wp-content/uploads/2018/12/184224_1326895.794x1200_q95_crop-smart_upscale.jpg"
@@ -53,16 +53,16 @@ export default function BookCard() {
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
-            Title
-   </Typography>
+            {props.title}
+          </Typography>
           <Typography>
-            This is a media card. You can use this section to describe the content.
-   </Typography>
+          {props.author}
+          </Typography>
         </CardContent>
         <CardActions>
           <Button size="small" color="primary">
             View
-   </Button>
+          </Button>
         </CardActions>
         {/* </form> */}
       </Card>

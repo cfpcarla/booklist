@@ -1,22 +1,40 @@
 import React from 'react';
 import BookCard from '../BookCard/BookCard'
 import Grid from '@material-ui/core/Grid';
-import axios from 'axios'
 import Async from 'react-async';
+import { makeStyles } from '@material-ui/core/styles';
 
-const oldloadBooks = () => {
-  // fetch("http://localhost:8080/books").then(res => (res.ok ? res : Promise.reject(res)))
-  // .then(res => res.json())
-
-  axios({
-    method: "get",
-    url: "http://localhost:8080/books",
-    responseType: "json"
-  }).then((books) => {
-    console.log(books)
-    return books
-  }).catch(error => console.log(error));
-}
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
+}));
 
 const loadBooks = () =>
   fetch("http://localhost:8080/books")
@@ -24,6 +42,7 @@ const loadBooks = () =>
     .then(res => res.json())
 
 export default function BookCardList() {
+  const classes = useStyles();
   return (
     <Async promiseFn={loadBooks}>
       <Async.Loading>Loading...</Async.Loading>
@@ -33,7 +52,9 @@ export default function BookCardList() {
             <div>
               {data.books.map(bookCard => (
                 <Grid item key={bookCard.id} xs={12} sm={6} md={4}>
-                  <BookCard />
+                  <BookCard
+                  title={bookCard.title}
+                  author={bookCard.author} />
                 </Grid>
               ))}
             </div>

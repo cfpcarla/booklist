@@ -6,8 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios'
-
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -41,21 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function BookCard() {
   const classes = useStyles();
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//   axios({
-//     method: "get",
-//     url: "http://localhost:8080/books",
-//     responseType: "json"
-//   }).then((books) => {
-//     console.log(books)
-//   }).catch(error => console.log(error));
-// }
 
   return (
     <React.Fragment >

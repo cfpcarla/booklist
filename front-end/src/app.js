@@ -6,8 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import NavBar from "./Components/NavBar/NavBar";
 import BookCardList from "./Components/BookCardList/BookCardList";
+import AppBar from "@material-ui/core/AppBar";
+import Avatar from "@material-ui/core/Avatar";
+import MenuBook from "@material-ui/icons/MenuBook";
+import Toolbar from "@material-ui/core/Toolbar";
 
 function Copyright() {
   return (
@@ -60,7 +63,16 @@ export default function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavBar />
+      <AppBar position="relative">
+        <Toolbar>
+          <Avatar className={classes.avatar}>
+            <MenuBook />
+          </Avatar>
+          <Typography variant="h5" color="inherit" noWrap>
+            BookList
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">

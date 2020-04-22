@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +10,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";
 import MenuBook from "@material-ui/icons/MenuBook";
 import Toolbar from "@material-ui/core/Toolbar";
+import PropTypes from "prop-types";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
+import AddBookPage from "./Components/AddBookPage/AddBookPage";
 
 function Copyright() {
   return (
@@ -26,6 +30,9 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
   icon: {
     marginRight: theme.spacing(2)
   },
@@ -51,17 +58,54 @@ const useStyles = makeStyles(theme => ({
   cardContent: {
     flexGrow: 1
   },
+  textField: {
+    width: "100%"
+  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6)
   }
 }));
 
-export default function App() {
-  const classes = useStyles();
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <React.Fragment>
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`
+  };
+}
+
+export default function App() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
@@ -71,59 +115,49 @@ export default function App() {
           <Typography variant="h5" color="inherit" noWrap>
             BookList
           </Typography>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+          >
+            <Tab label="Library" {...a11yProps(0)} />
+            <Tab label="Add a new book" {...a11yProps(1)} />
+          </Tabs>
         </Toolbar>
       </AppBar>
       <main>
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              “I do believe something very magical can happen when you read a
-              book.” – J.K. Rowling
-            </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center"></Grid>
-            </div>
+        <TabPanel value={value} index={0}>
+          <div className={classes.heroContent}>
+            <Container maxWidth="sm">
+              <Typography
+                variant="h5"
+                align="center"
+                color="textSecondary"
+                paragraph
+              >
+                “I do believe something very magical can happen when you read a
+                book.” – J.K. Rowling
+              </Typography>
+              <div className={classes.heroButtons}>
+                <Grid container spacing={2} justify="center"></Grid>
+              </div>
+            </Container>
+          </div>
+          <Container className={classes.cardGrid} maxWidth="md">
+            <Grid container spacing={4}>
+              <BookCardList />
+            </Grid>
           </Container>
-        </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          <Grid container spacing={4}>
-            <BookCardList />
-          </Grid>
-        </Container>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <AddBookPage />
+        </TabPanel>
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
         <Copyright />
       </footer>
       {/* End footer */}
-    </React.Fragment>
+    </div>
   );
 }
-
-// axios({
-//   method: "get",
-//   url: `https://maps.googleapis.com/maps/api/geocode/json?address=${request.body.address}&key=${apiKey}`,
-//   responseType: "json"
-// }).then((locationResponse) => {
-//   console.log("gmap response", locationResponse.data);
-//   const { lat, lng } = locationResponse.data.results[0].geometry.location;
-//   db.createPost(
-//     request.body.title,
-//     request.body.autor,
-//     request.body.isbn,
-//   )
-//     .then(({ rows: newPosts }) => {
-//       response.json(newPosts);
-//     })
-//     .catch(error => console.log(error));
-// });
-
-// useEffect(() => {
-//   setUser(JSON.parse(localStorage.getItem('user')));
-//   getPosts();
-// }, []); //make a function to get called after a new post

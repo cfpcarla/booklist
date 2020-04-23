@@ -49,7 +49,11 @@ export default function BookCard(props) {
           {/* <form onSubmit={handleSubmit}> */}
           <CardMedia
             className={classes.cardMedia}
-            image="https://s26162.pcdn.co/wp-content/uploads/2018/12/184224_1326895.794x1200_q95_crop-smart_upscale.jpg"
+            image={
+              props.image
+                ? props.image
+                : "https://s26162.pcdn.co/wp-content/uploads/2018/12/184224_1326895.794x1200_q95_crop-smart_upscale.jpg"
+            }
             title="Image title"
           />
           <CardContent className={classes.cardContent}>

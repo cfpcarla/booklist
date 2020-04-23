@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import NewBookCardList from "../BookCardList/NewBookCardList";
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -12,29 +13,47 @@ const useStyles = makeStyles(theme => ({
 
 export default function AddBookPage() {
   const classes = useStyles();
-  // const [value, setValue] = React.useState(0);
+  const [books, setBooks] = useState([]);
 
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
+  useEffect(() => {
+    // Update the document title using the browser API
+  });
+  const searchBook = term =>
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${term}`)
+      .then(response =>
+        response.ok ? response.json() : Promise.reject(response)
+      )
+      .then(data => {
+        setBooks(data.items);
+      });
 
   return (
-    <form noValidate autoComplete="off">
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <TextField
-            id="outlined-basic"
-            label="Outlined"
-            variant="outlined"
-            className={classes.textField}
-          />
+    <div>
+      <form noValidate autoComplete="off">
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4}>
+            <TextField
+              id="outlined-basic"
+              label="Outlined"
+              variant="outlined"
+              className={classes.textField}
+            />
+          </Grid>
+          <Grid item xs={12} md={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                searchBook("pipoca");
+              }}
+            >
+              Search
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={1}>
-          <Button variant="contained" color="primary">
-            Search
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+      <br></br>
+      <NewBookCardList books={books} />
+    </div>
   );
 }

@@ -13,11 +13,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function AddBookPage() {
   const classes = useStyles();
+  const [term, setTerm] = useState("");
   const [books, setBooks] = useState([]);
 
-  useEffect(() => {
-    // Update the document title using the browser API
-  });
   const searchBook = term =>
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${term}`)
       .then(response =>
@@ -27,9 +25,13 @@ export default function AddBookPage() {
         setBooks(data.items);
       });
 
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    searchBook(term);
+  };
   return (
     <div>
-      <form noValidate autoComplete="off">
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <TextField
@@ -37,16 +39,12 @@ export default function AddBookPage() {
               label="Outlined"
               variant="outlined"
               className={classes.textField}
+              value={term}
+              onChange={e => setTerm(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                searchBook("pipoca");
-              }}
-            >
+            <Button variant="contained" color="primary" type="submit">
               Search
             </Button>
           </Grid>

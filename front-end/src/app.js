@@ -144,9 +144,7 @@ export default function App() {
             </Container>
           </div>
           <Container className={classes.cardGrid} maxWidth="md">
-            <Grid container spacing={4}>
-              <BookCardList />
-            </Grid>
+            <BookCardList />
           </Container>
         </TabPanel>
         <TabPanel value={value} index={1}>

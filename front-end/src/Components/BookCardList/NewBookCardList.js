@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 
 export default function NewBookCardList({ books }) {
   return (
-    <div>
+    <Grid container spacing={3}>
       {books.map(book => (
         <Grid item xs={12} sm={6} md={4}>
           <BookCard
@@ -20,6 +20,6 @@ export default function NewBookCardList({ books }) {
           />
         </Grid>
       ))}
-    </div>
+    </Grid>
   );
 }

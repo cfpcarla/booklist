@@ -6,7 +6,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -26,6 +25,15 @@ const useStyles = makeStyles(theme => ({
 export default function BookCard(props) {
   const classes = useStyles();
 
+  const addBook = body =>
+    fetch("http://localhost:8080/books/create", {
+      method: "post",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => (res.ok ? res : Promise.reject(res)))
+      .then(json => console.log(json));
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -44,8 +52,8 @@ export default function BookCard(props) {
         <Typography>{props.author}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
-          View
+        <Button size="small" color="primary" onClick={() => addBook(props)}>
+          Add
         </Button>
       </CardActions>
       {/* </form> */}

@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import AddBookPage from "../AddBookPage/AddBookPage";
 import BookCardList from "../BookCardList/BookCardList";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -37,27 +38,37 @@ export default function BookCard(props) {
       .then(json => console.log(json));
 
   return (
-    <Card className={classes.card}>
-      <CardMedia
-        className={classes.cardMedia}
-        image={
-          props.image
-            ? props.image
-            : "https://s26162.pcdn.co/wp-content/uploads/2018/12/184224_1326895.794x1200_q95_crop-smart_upscale.jpg"
-        }
-        title="Image title"
-      />
-      <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h5" component="h2">
-          {props.title}
-        </Typography>
-        <Typography>{props.author}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" color="primary" onClick={() => addBook(props)}>
-          Add
-        </Button>
-      </CardActions>
-    </Card>
+    <div>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={12}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.cardMedia}
+              image={
+                props.image
+                  ? props.image
+                  : "https://s26162.pcdn.co/wp-content/uploads/2018/12/184224_1326895.794x1200_q95_crop-smart_upscale.jpg"
+              }
+              title="Image title"
+            />
+            <CardContent className={classes.cardContent}>
+              <Typography gutterBottom variant="h5" component="h2">
+                {props.title}
+              </Typography>
+              <Typography>{props.author}</Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => addBook(props)}
+              >
+                Add
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Grid>
+    </div>
   );
 }

@@ -16,19 +16,6 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import AddBookPage from "./Components/AddBookPage/AddBookPage";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -153,9 +140,21 @@ export default function App() {
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
-        <Copyright />
+        {/* End footer */}
+        <Typography variant="body1" color="textSecondary" align="center">
+          <Link
+            color="inherit"
+            href="https://www.linkedin.com/in/carla-fabricia-medeiros/?locale=en_US"
+          >
+            Linkedin
+          </Link>
+        </Typography>
+        <Typography variant="body1" color="textSecondary" align="center">
+          <Link color="inherit" href="https://github.com/cfpcarla">
+            Github
+          </Link>
+        </Typography>
       </footer>
-      {/* End footer */}
     </div>
   );
 }

@@ -6,6 +6,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import AddBookPage from "../AddBookPage/AddBookPage";
+import BookCardList from "../BookCardList/BookCardList";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -56,7 +58,6 @@ export default function BookCard(props) {
           Add
         </Button>
       </CardActions>
-      {/* </form> */}
     </Card>
   );
 }

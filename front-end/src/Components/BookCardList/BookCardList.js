@@ -22,6 +22,7 @@ export default function BookCardList() {
                     <IndexPageBookCard
                       title={bookCard.title}
                       author={bookCard.author}
+                      image={bookCard.image_url}
                     />
                   </Grid>
                 ))}

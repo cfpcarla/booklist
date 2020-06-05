@@ -1,5 +1,5 @@
 import React from "react";
-import BookCard from "../BookCard/BookCard";
+import IndexPageBookCard from "../BookCard/IndexPageBookCard";
 import Grid from "@material-ui/core/Grid";
 import Async from "react-async";
 
@@ -21,7 +21,10 @@ export default function BookCardList() {
               <Grid container spacing={3}>
                 {data.books.map(bookCard => (
                   <Grid item key={bookCard.id} xs={12} sm={6} md={4}>
-                    <BookCard title={bookCard.title} author={bookCard.author} />
+                    <IndexPageBookCard
+                      title={bookCard.title}
+                      author={bookCard.author}
+                    />
                   </Grid>
                 ))}
               </Grid>

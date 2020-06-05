@@ -9,8 +9,6 @@ const loadBooks = () =>
     .then(res => res.json());
 
 export default function BookCardList() {
-  // const classes = useStyles();
-
   return (
     <Async promiseFn={loadBooks}>
       <Async.Loading>Loading...</Async.Loading>

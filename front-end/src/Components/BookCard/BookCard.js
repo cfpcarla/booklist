@@ -6,9 +6,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import AddBookPage from "../AddBookPage/AddBookPage";
-import BookCardList from "../BookCardList/BookCardList";
 import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -22,11 +22,27 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent: {
     flexGrow: 1
+  },
+  alert: {
+    width: "100%"
   }
 }));
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function BookCard(props) {
   const classes = useStyles();
+  const [openAlert, setOpenAlert] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
 
   const addBook = body =>
     fetch("http://localhost:8080/books/create", {
@@ -35,10 +51,18 @@ export default function BookCard(props) {
       headers: { "Content-Type": "application/json" }
     })
       .then(res => (res.ok ? res : Promise.reject(res)))
-      .then(json => console.log(json));
+      .then(json => {
+        console.log(json);
+        setOpenAlert(true);
+      });
 
   return (
     <div>
+      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Book added!
+        </Alert>
+      </Snackbar>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
           <Card className={classes.card}>

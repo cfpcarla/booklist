@@ -135,7 +135,9 @@ export default function App() {
           </Container>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <AddBookPage />
+          <Container className={classes.cardGrid} maxWidth="md">
+            <AddBookPage />
+          </Container>
         </TabPanel>
       </main>
       {/* Footer */}

@@ -10,7 +10,7 @@ export default function NewBookCardList({ books }) {
           key={book.volumeInfo.industryIdentifiers[0].identifier}
           item
           xs={12}
-          sm={8}
+          sm={6}
           md={4}
         >
           <BookCard

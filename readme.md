@@ -4,9 +4,9 @@
 
 - Booklist is a platform in which you can search for books and save them to read later.
 
-![Initial page](https://github.com/cfpcarla/task-Scheduling-project/blob/master/my-app/src/images/initial_page.jpg)
+![Initial page](https://github.com/cfpcarla/booklist/blob/master/img/initial-page.jpg)
 
-![Add New Book](https://github.com/cfpcarla/task-Scheduling-project/blob/master/my-app/src/images/add_task.jpg)
+![Add New Book](https://github.com/cfpcarla/booklist/blob/master/img/add-book.jpg)
 
 ## Technologies
 

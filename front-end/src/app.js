@@ -16,42 +16,48 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import AddBookPage from "./Components/AddBookPage/AddBookPage";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   icon: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
+    paddingBottom: theme.spacing(8),
   },
   card: {
     height: "100%",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   cardContent: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   textField: {
-    width: "100%"
+    width: "100%",
+    marginRight: "20px",
+    marginLeft: "20px",
+  },
+  booklist: {
+    marginRight: "20px",
+    marginLeft: "20px",
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6)
-  }
+    padding: theme.spacing(6),
+  },
 }));
 
 function TabPanel(props) {
@@ -73,13 +79,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -99,7 +105,12 @@ export default function App() {
           <Avatar className={classes.avatar}>
             <MenuBook />
           </Avatar>
-          <Typography variant="h5" color="inherit" noWrap>
+          <Typography
+            variant="h5"
+            color="inherit"
+            noWrap
+            className={classes.booklist}
+          >
             BookList
           </Typography>
           <Tabs
